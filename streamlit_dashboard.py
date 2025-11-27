@@ -16,9 +16,16 @@ import os
 # Load environment variables
 load_dotenv()
 
-# Telegram Bot Configuration
-TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+# Telegram Bot Configuration - works locally and on Streamlit Cloud
+try:
+    # Try Streamlit secrets first (for cloud deployment)
+    TELEGRAM_BOT_TOKEN = st.secrets.get("TELEGRAM_BOT_TOKEN")
+    TELEGRAM_CHAT_ID = st.secrets.get("TELEGRAM_CHAT_ID")
+except:
+    # Fall back to .env file (for local development)
+    TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+    TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+
 TELEGRAM_ENABLED = bool(TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID)
 
 # Page configuration
