@@ -378,7 +378,7 @@ with st.sidebar:
             ports = serial.tools.list_ports.comports()
             port_list = [p.device for p in ports]
             if not port_list:
-                port_list = ["COM3"]
+                port_list = ["COM3","COM5"]
         except:
             port_list = ["COM3", "COM4", "COM5"]
         
